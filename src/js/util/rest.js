@@ -7,11 +7,11 @@ class RestClient
         return new Promise((_resolve, _reject) => {
             var _xhr = new XMLHttpRequest();
             _xhr.open('GET', _url);
-            // _xhr.setRequestHeader('Content-Type', 'application/json');
+            _xhr.setRequestHeader('Content-Type', 'application/json');
             _xhr.onload = () => {
                 if (_xhr.readyState == 4 && _xhr.status == 200)
                 {
-                    _resolve(JSON.parse(_xhr.response));
+                    _resolve(JSON.parse(_xhr.responseText));
                     // _resolve(_xhr)
 
                 }
@@ -43,7 +43,7 @@ class RestClient
             _xhr.onload = () => {
                 if (_xhr.readyState == 4 && _xhr.status == 200)
                 {
-                    _resolve(JSON.parse(_xhr.response));
+                    _resolve(JSON.parse(_xhr.responseText));
                 }
                 else if (_xhr.status > 300)
                 {
