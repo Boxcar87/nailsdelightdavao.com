@@ -18,7 +18,6 @@ const getDateString = function(_date){
 const getAppointment = async function(_firstName, _lastName, _email, _phone, _date, _store){
     const _customerData = await Rest.get(`${url}/getCustomerId?nameFirst=${_firstName}&nameLast=${_lastName}&email=${_email}$phone=${_phone}`);
     const _customerId = _customerData.message;
-    console.log(_customerId, _date, _store)
     const _resp = await Rest.get(`${url}/getAppointments?date=${_date}&customer=${_customerId}&store=${_store}`);
     const _appointment = _resp.message[0];
     return _appointment;
@@ -28,7 +27,6 @@ const getAppointments = async function(_epoch, _store='1'){
     const _end = new Date(_epoch+691200000);
     const _startDate = getDateString(_start);
     const _endDate =  getDateString(_end);
-    console.log(_startDate,_endDate)
     const _resp = await Rest.get(`${url}/getAppointments?startDate=${_startDate}&endDate=${_endDate}&store=${_store}`);
 
     for(var i=0;i<_resp.message.length; i++){
@@ -63,7 +61,6 @@ const scheduleAppointment = async function(_firstName, _lastName, _email, _phone
 const rescheduleAppointment = async function(_firstName, _lastName, _email, _phone, _oldDate, _newDate, _time, _services, _store='1'){
     const _appointment = await getAppointment(_firstName, _lastName, _email, _phone, _oldDate, _store);
     const _appointmentId = _appointment._id;
-    console.log(_appointmentId)
     const _data = {
         appointmentId: _appointmentId,
         new:{
@@ -82,7 +79,7 @@ const test = async function(){
     // var _resp2 = await getAppointment('Linda','Wright','email@email.com','0000000','2022-11-29')
     // console.log(_resp2)
 }
-test();
+// test();
 
 module.exports = {
     getAppointments,
