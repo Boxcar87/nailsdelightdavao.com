@@ -37,22 +37,22 @@
                     <input type="text" id="apt_lastName" placeholder="Last Name">
                 </div>
                 <div class="appointment_field">
-                    <input type="text" id="apt_phone" placeholder="Phone (example: 09121231234)">
+                    <input type="text" id="apt_phone" oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')" placeholder="Phone (example: 09121231234)">
                 </div>
                 <div class="appointment_field">
-                    <input type="text" id="apt_email" placeholder="Email">
+                    <input type="email" id="apt_email" placeholder="Email">
                 </div>
                 <div id="apt_selector">
                     <div id="controls_container" class="row">
                         <div class="col-1"></div>
                         <div id="days_left_arrow" class="col-2 noPadding">
-                            <svg class="appointment_nav_arrow_cont" width="20px" height="20px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="appointment_nav_arrow_cont" id="leftSVG_cont" width="20px" height="20px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path class="appointment_nav_arrow" id="leftSVG" style="fill:#888;" d="M10,0 C15.5228475,0 20,4.4771525 20,10 C20,15.5228475 15.5228475,20 10,20 C4.4771525,20 0,15.5228475 0,10 C0,4.4771525 4.4771525,0 10,0 Z M10.7879967,5.64577005 L6.91785319,9.61728273 C6.65804237,9.88389868 6.66011276,10.3096256 6.92250445,10.5737019 L10.792648,14.4686937 C11.0580611,14.735811 11.4897623,14.7371924 11.7568796,14.4717792 C12.0239968,14.2063661 12.0253782,13.7746649 11.7599651,13.5075477 L8.36270656,10.088477 L11.7646163,6.59746236 C12.0274189,6.3277763 12.0218388,5.89610897 11.7521527,5.6333064 C11.4824666,5.37050382 11.0507993,5.37608399 10.7879967,5.64577005 Z"/>
                               </svg>                              
                         </div>
                         <div id="selected_date" class="col-6"></div>
                         <div id="days_right_arrow" class="col-2 noPadding">
-                            <svg class="appointment_nav_arrow_cont" width="20px" height="20px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="appointment_nav_arrow_cont" id="rightSVG_cont"width="20px" height="20px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path class="appointment_nav_arrow" id="rightSVG" d="M10,0 C15.5228475,0 20,4.4771525 20,10 C20,15.5228475 15.5228475,20 10,20 C4.4771525,20 0,15.5228475 0,10 C0,4.4771525 4.4771525,0 10,0 Z M8.74858635,5.64577005 C8.48578378,5.37608399 8.05411645,5.37050382 7.78443039,5.6333064 C7.51474433,5.89610897 7.50916416,6.3277763 7.77196674,6.59746236 L7.77196674,6.59746236 L11.1738765,10.088477 L7.776618,13.5075477 C7.51120484,13.7746649 7.51258627,14.2063661 7.77970352,14.4717792 C8.04682076,14.7371924 8.47852194,14.735811 8.7439351,14.4686937 L8.7439351,14.4686937 L12.6140786,10.5737019 C12.8764703,10.3096256 12.8785407,9.88389868 12.6187299,9.61728273 L12.6187299,9.61728273 Z"/>
                               </svg>
                         </div>
@@ -70,6 +70,12 @@
             <div id="map">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d294.29684048367716!2d125.55628604561691!3d7.059641494207702!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sph!4v1668183124495!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
+        </div>
+        <div id="darkenedBG" class="hidden"></div>
+        <div id="appointmentPopup" class="hidden">
+            <img id="appointmentPopupImage" src="" data-loading="" data-error="" data-confirmed="">
+            <p id="appointmentPopupText"></p>
+            <div id="appointmentPopupClose">Confirm</div>
         </div>
     </body>
 </html>
