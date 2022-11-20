@@ -2,7 +2,7 @@
 
 const Rest = require('./util/rest.js');
 const url = 'https://0043hn7q1b.execute-api.ap-southeast-1.amazonaws.com/dev'
-var _appointments = {}
+var _appointments = {"2022-11-30":["1500","1530","1700"],"2022-12-1":["1100","1230","1700","1700"]}
 
 const listedAppointments = function(){
     return _appointments;
@@ -38,7 +38,7 @@ const getAppointments = async function(_epoch, _store='1'){
     return _appointments
 }
 
-const scheduleAppointment = async function(_firstName, _lastName, _email, _phone, _date, _time, _services, _store='1'){
+const scheduleAppointment = async function(_firstName, _lastName, _email, _phone, _date, _time, _store='1'){
     var _data = {
         customer: {
             nameFirst: _firstName,
@@ -51,7 +51,7 @@ const scheduleAppointment = async function(_firstName, _lastName, _email, _phone
             store: _store,
             date: _date,
             time: _time,
-            services: _services
+            source: 'website'
         }
     }
     const _resp = await Rest.postData(`${url}/setAppointment`, _data);
@@ -85,5 +85,6 @@ module.exports = {
     getAppointments,
     scheduleAppointment,
     rescheduleAppointment,
-    listedAppointments
+    listedAppointments,
+    getDateString
 }

@@ -59,13 +59,17 @@ body::-webkit-scrollbar {
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
-    background: white;
+    background: rgb(250, 250, 250);
     border: 1px solid rgb(189, 189, 189);
-    border-radius: 15px;
+    border-radius: 10px;
     margin: 0;
     padding: 0;
-    padding: 40px 0px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.158);
+    padding: 20px 0px;
+    /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.158); */
+}
+#appointment_container p{    
+    text-align: center;
+    font-size: 30px;
 }
 #controls_container{
     margin: 0;
@@ -74,40 +78,12 @@ body::-webkit-scrollbar {
     position: relative;
     height: 50px;
 }
-#days_left_arrow{
-    padding: 0;
-}
-#days_left_arrow svg{
-    width: 100%;
-    height: 100%;
-    padding: 0;
-}
-#days_left_arrow svg path{
-    fill: #888 !important;
-    transition: ease-in-out .1s;
-}
-#days_left_arrow svg path:active{
-    fill: #999 !important;
-}
-#days_right_arrow{
-    padding: 0;
-}
-#days_right_arrow svg{
-    width: 100%;
-    height: 100%;
-    padding: 0;
-}
-#days_right_arrow svg path{
-    fill: #888 !important;
-    transition: ease-in-out .1s;
-}
-#days_right_arrow svg path:active{
-    fill: #999 !important;
-}
 #apt_availibility{
+    position: relative;
     border-top:1px solid rgba(0, 0, 0, 0.158);
     margin-top: 5%;
-    width: 100%;
+    width: 90%;
+    left: 5%;
 }
 #apt_hours{
     position: relative;
@@ -142,7 +118,22 @@ body::-webkit-scrollbar {
 #apt_confirm:active{    
     background-color: #34aeff;  
 }
+#selected_date{
+    text-align: center;
+    padding-top: 8px;
+    font-size: 20px;
+    border: 1px solid rgb(215, 215, 215);
+    border-radius: 5px;
+    background: white;
+    user-select: none;
+}
 
+.hidden{
+    display: none;
+}
+.noPadding{
+    padding: 0;
+}
 .header-title{
     font-size: 20px;
     font-family: 'Zen Dots';
@@ -154,7 +145,7 @@ body::-webkit-scrollbar {
     height: 25px;
 }
 .bg_one{
-    height: 100%;
+    height: 70%;
     width: 100%;
     background-image: url('../assets/salon.png');
     background-size: 100% 100%;
@@ -162,6 +153,7 @@ body::-webkit-scrollbar {
 .bg_two{
     height: 100%;
     width: 100%;
+    background-color: white;
 }
 .appointment_field{
     margin: 5%;
@@ -171,19 +163,46 @@ body::-webkit-scrollbar {
     box-shadow:inset 1px 1px 2px 1px rgb(150, 149, 149);
     border-radius: 5px;
     border: none;
-    background:rgba(192, 192, 192, 0.336);
+    /* background:rgba(192, 192, 192, 0.336); */
+    background: white;
     padding-left: 5px;
 }
 .aptHour{
     flex: 0 1 30%;
     padding: 0 1rem;
     height: 35px;
-    background:rgba(192, 192, 192, 0.432);
+    /* background:rgba(192, 192, 192, 0.432); */
+    background: white;
     border: 1px solid rgba(133, 133, 133, 0.336);
     border-radius: 5px;
     margin: 5px;
     text-align: center;
     padding-top: 3px;
+    transition: ease-in-out .2s;
+}
+.aptHour:hover{
+    border: 1px solid black;
+}
+.aptHour:active{    
+    border: 1px solid rgba(75, 75, 75, 0.336);
+    background: rgb(213, 235, 253);
+}
+.appointment_nav_arrow_cont{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+.appointment_nav_arrow{
+    fill: #999 !important;
+    transition: ease-in-out .1s;
+}
+.appointment_nav_arrow:hover{
+    fill: #888 !important;
+    
+}
+.appointment_nav_arrow:active{
+    fill: #777 !important;
+    
 }
 
 h1, h2, h3, h4, h5, h6 {
