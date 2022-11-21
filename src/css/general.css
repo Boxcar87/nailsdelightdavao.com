@@ -134,7 +134,7 @@ body::-webkit-scrollbar {
     left: 50%;
     transform: translate(-50%,-50%);
     width: 90%;
-    max-width: 500px;
+    max-width: 400px;
     aspect-ratio: 1/1;
     background: white;
     border-radius: 10px;
@@ -167,8 +167,17 @@ body::-webkit-scrollbar {
     background-color: #34aeff;
     font-size: 20px;
     position: absolute;
+    text-align: center;
 }
 
+.appointmentPopupIcon{
+    position: absolute;
+    left: 41%;
+    top: 20%;
+    height: 80px;
+    width: 80px;
+    transform: translate(0,-41%);
+}
 .hidden{
     display: none;
 }
@@ -247,6 +256,31 @@ body::-webkit-scrollbar {
 .appointment_nav_arrow:active{
     fill: #777 !important;
     
+}
+.lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid rgb(214, 214, 214);
+    border-color: rgb(214, 214, 214) transparent rgb(214, 214, 214) transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
 }
 
 h1, h2, h3, h4, h5, h6 {

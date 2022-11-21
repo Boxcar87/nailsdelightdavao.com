@@ -160,7 +160,7 @@ const getReadableDate = function(_day, _date){
 }
 
 const validateAppointmentParams = function(_firstName, _lastName, _email, _phone, _date, _time){
-    var _data = {valid: true};
+    var _data = {valid: true, params: {firstName: _firstName, lastName: _lastName, email: _email, phone: _phone, date: _date, time: _time}};
     var _mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     var _emailResult = _email.match(_mailFormat) ? _email.match(_mailFormat) : [];
     if(!_firstName){

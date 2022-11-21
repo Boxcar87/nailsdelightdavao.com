@@ -4,7 +4,11 @@ const {
     scheduleAppointment,
     loadAvailableTimes,
     getDateString 
-} = require("./appointments")
+} = require('./appointments.js');
+
+const {
+    sendSMS
+} = require('./phoneMessage.js')
 
 var _selectedHour = null;
 
@@ -39,7 +43,7 @@ const appointmentSelection = async function(_event){
         var _lastName = document.getElementById('apt_lastName').value;
         var _phone = document.getElementById('apt_phone').value;
         var _email = document.getElementById('apt_email').value;
-        var _valResp = validateAppointmentParams(_firstName, _lastName, _email, _phone, _time, _date);
+        var _valResp = validateAppointmentParams(_firstName, _lastName, _email, _phone, _date, _time);
         appointmentPopup(_valResp);
     }
 }
@@ -59,7 +63,9 @@ const appointmentPopupSelection = async function(_event){
 const appointmentPopup = async function(_data){
     var _popup = document.getElementById('appointmentPopup');
     var _popupText = document.getElementById('appointmentPopupText');
-    var _popupImage = document.getElementById('appointmentPopupImage');
+    var _popupLoading = document.getElementById('appointmentPopupLoading');
+    var _popupSuccess = document.getElementById('appointmentPopupSuccess');
+    var _popupError = document.getElementById('appointmentPopupError');
     var _bg = document.getElementById('darkenedBG');
     _popup.classList.remove('hidden');
     _bg.classList.remove('hidden');
@@ -67,39 +73,63 @@ const appointmentPopup = async function(_data){
     if(_data.date){
         _message = _data.date;
         _popupText.textContent = _message;
-        _popupImage.src = _popupImage.getAttribute('data-error');
+        _popupLoading.classList.add('hidden');
+        _popupSuccess.classList.add('hidden');
+        _popupError.classList.remove('hidden');
         return;
-        //populate
     }
     if(_data.time){
         _message = _data.time;
         _popupText.textContent = _message;
-        _popupImage.src = _popupImage.getAttribute('data-error');
+        _popupLoading.classList.add('hidden');
+        _popupSuccess.classList.add('hidden');
+        _popupError.classList.remove('hidden');
         return;
-        //populate
     }
     if(_data.nameFirst){
         _message = _data.nameFirst;
         _popupText.textContent = _message;
-        _popupImage.src = _popupImage.getAttribute('data-error');
+        _popupLoading.classList.add('hidden');
+        _popupSuccess.classList.add('hidden');
+        _popupError.classList.remove('hidden');
         return;
-        //populate
     }
     if(_data.nameLast){
         _message = _data.nameLast;
         _popupText.textContent = _message;
-        _popupImage.src = _popupImage.getAttribute('data-error');
+        _popupLoading.classList.add('hidden');
+        _popupSuccess.classList.add('hidden');
+        _popupError.classList.remove('hidden');
         return;
-        //populate
     }
     if(_data.contact){
         _message = _data.contact;
         _popupText.textContent = _message;
-        _popupImage.src = _popupImage.getAttribute('data-error');
+        _popupLoading.classList.add('hidden');
+        _popupSuccess.classList.add('hidden');
+        _popupError.classList.remove('hidden');
         return;
-        //populate
     }
-    // var _appointmentResp = await scheduleAppointment(_firstName, _lastName, _email, _phone, _date, _time);
+    _popupError.classList.add('hidden');
+    _popupSuccess.classList.add('hidden');
+    _popupLoading.classList.remove('hidden');
+    _popupText.textContent = 'Submitting appointment...';
+    var _appointmentResp = await scheduleAppointment(_data.params.firstName, _data.params.lastName, _data.params.email, _data.params.phone, _data.params.date, _data.params.time);
+    console.log(_appointmentResp)
+    if(_appointmentResp.message.acknowledged){
+        _popupLoading.classList.add('hidden');
+        _popupSuccess.classList.remove('hidden');
+        _popupText.textContent = `Appointment booked!`;
+
+       console.log(sendSMS(_data.params.phone));
+        //send email if given
+        //send text if no email
+    }
+    else{
+        _popupLoading.classList.add('hidden');
+        _popupError.classList.remove('hidden');
+        _popupText.textContent = `Error: ${_appointmentResp.message}`;
+    }
 }
 
 const nextDay = function(_epoch){
